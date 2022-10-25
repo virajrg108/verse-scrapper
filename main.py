@@ -18,11 +18,20 @@ def get_canto_details(canto_nbr):
     for i in range(len(chaptersRaw)):
         chapters.append({ "id": i, "name": chaptersRaw[i].find('a').decode_contents().strip()})
     
-    return chapters
+    return cantoTitle, chapters
+
+def fetchCanto(canto_nbr):
+    cantoTitle, chapters = get_canto_details(canto_nbr)
+    cantoDetails = { 'name': cantoTitle.strip(), 'totalChapters': len(chapters), 'chapters': chapters }
+    with open('data/sb_canto{}_details.json'.format(canto_nbr), 'w+') as outfile:
+        outfile.seek(0)
+        outfile.write(json.dumps(cantoDetails, indent=4))
+
+    print(cantoDetails)
 
 
-def scrap_sb():
-    with open('config.json', 'r+') as openfile:
+if __name__ == "__main__":
+    with open('config.json', 'r') as openfile:
         config_json = json.load(openfile)
 
     print(config_json)
@@ -31,20 +40,12 @@ def scrap_sb():
         if config_json['sb'][key]:
             print("Fetch info of Canto {}".format(key))
             # code to call fetch function of canto scrapper
+            fetchCanto(key)
 
     for key in config_json['bg']:
         if config_json['bg'][key]:
             print("Fetch info of Canto {}".format(key))
             # code to call fetch function of bg chapter scrapper
-
-    # chapters = get_canto_details(2)
-    # with open('sb_canto1.json', 'r+') as openfile:
-    #     json_object = json.load(openfile)
-
-    # json_object['chapters'] = chapters
-    # print(json_object)
-
-
 
 
     # html = requests.get('https://vedabase.io/en/library/sb/1/1/1')
@@ -60,7 +61,3 @@ def scrap_sb():
     #     title.decompose()
 
     # print(purport)
-
-if __name__ == "__main__":
-    scrap_sb()
-
