@@ -1,11 +1,5 @@
 {
-    "id": 1,
     "name": "Canto 1",
-    "chapterLength": 19,
-    "chapters": [
-        {
-            "id": 1,
-            "name": "CHAPTER ONE: Questions by the Sages"
-        }
-    ]
+    "totalChapters": 12,
+    "chapters": []
 }

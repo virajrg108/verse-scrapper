@@ -22,8 +22,31 @@ def get_canto_details(canto_nbr):
 
 
 def scrap_sb():
-    chapters = get_canto_details(2)
-    
+    with open('config.json', 'r+') as openfile:
+        config_json = json.load(openfile)
+
+    print(config_json)
+
+    for key in config_json['sb']:
+        if config_json['sb'][key]:
+            print("Fetch info of Canto {}".format(key))
+            # code to call fetch function of canto scrapper
+
+    for key in config_json['bg']:
+        if config_json['bg'][key]:
+            print("Fetch info of Canto {}".format(key))
+            # code to call fetch function of bg chapter scrapper
+
+    # chapters = get_canto_details(2)
+    # with open('sb_canto1.json', 'r+') as openfile:
+    #     json_object = json.load(openfile)
+
+    # json_object['chapters'] = chapters
+    # print(json_object)
+
+
+
+
     # html = requests.get('https://vedabase.io/en/library/sb/1/1/1')
     # parsed_html = BeautifulSoup(html.text)
     # verseNbr = parsed_html.body.find('div', attrs={'id': 'bb13392'}).decode_contents()
