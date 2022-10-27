@@ -4,12 +4,15 @@ import json
 from bs4 import BeautifulSoup
 
 def get_canto_details(canto_nbr):
+    # print('getting details of Canto ', canto_nbr)
     html = requests.get('https://vedabase.io/en/library/sb/{}'.format(canto_nbr))
     parsed_html = BeautifulSoup(html.text, features="html.parser")
     cantoTitle = parsed_html.body.find('div', attrs={'class': 'r-canto'}).decode_contents()
+    # print(cantoTitle)
     chaptersRaw = parsed_html.body.select('div.bb.r-chapter')
 
     chaptersRaw = list(filter(lambda x: "CHAPTER" in x.decode_contents(), chaptersRaw))
+    # print(chaptersRaw)
 
     chapters = []
     for i in range(len(chaptersRaw)):
@@ -18,6 +21,7 @@ def get_canto_details(canto_nbr):
     return cantoTitle, chapters
 
 def getVerseLinks(verseList):
+    # print("verseList1:", verseList)
     verseList = list(filter(lambda x: "Text" in x.decode_contents(), verseList))
     verseList = map(lambda x: str(x), verseList)
 
@@ -25,6 +29,16 @@ def getVerseLinks(verseList):
     for v in verseList:
         links.append(v)
     return links
+
+    # print("verseList2:", verseList)
+    # newVerseList = []
+    # for v in verseList:
+    #     if "Texts" in v:
+    #         newVerseList.append(str(v[v.find('Texts')+6:v.find(':')]))
+    #     else:
+    #         newVerseList.append(str(v[v.find('Text')+5:v.find(':')]))
+    # print("verseList3:", list(newVerseList))
+    # return newVerseList
 
 def fetchCanto(canto_nbr, excludeChapters):
     cantoTitle, chapters = get_canto_details(canto_nbr)
@@ -35,6 +49,8 @@ def fetchCanto(canto_nbr, excludeChapters):
 
     print(cantoDetails)
 
+    # fetch all the chapters one by one
+    # determine the total verses in this chapter
     for chapterNbr in range(len(chapters)):
         if chapterNbr+1 in excludeChapters:
             print('Excluding chapter {}'.format(chapterNbr+1))
@@ -57,6 +73,8 @@ def fetchCanto(canto_nbr, excludeChapters):
         for i in range(chapter['totalVerses']):
             verse = {}
             print('https://vedabase.io{}'.format(chapter['verseLinks'][i]))
+            # print('https://vedabase.io/en/library/sb/{}/{}/{}'.format(canto_nbr, chapterNbr+1, chapter['verseNbrs'][i]))
+            # html = requests.get('https://vedabase.io/en/library/sb/{}/{}/{}'.format(canto_nbr, chapterNbr+1, chapter['verseNbrs'][i]))
             html = requests.get('https://vedabase.io{}'.format(chapter['verseLinks'][i]))
             parsed_html = BeautifulSoup(html.text, features="html.parser")
             verse['verseNbr'] = parsed_html.body.select('div.r-title.r-verse')[0].decode_contents().strip()
