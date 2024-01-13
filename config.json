@@ -1,0 +1,72 @@
+{
+    "sb": {
+        "1": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "2": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "3": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "4": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "5": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "6": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "7": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "8": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "9": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "10": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "11": {
+            "excludeChapters": [],
+            "fetch": false
+        },
+        "12": {
+            "excludeChapters": [],
+            "fetch": false
+        }
+    },
+    "bg": {
+        "1": false,
+        "2": false,
+        "3": false,
+        "4": false,
+        "5": false,
+        "6": false,
+        "7": false,
+        "8": false,
+        "9": false,
+        "10": false,
+        "11": false,
+        "12": false,
+        "13": false,
+        "14": false,
+        "15": false,
+        "16": false,
+        "17": false,
+        "18": false
+    }
+}
